@@ -41,11 +41,41 @@ cd /c/caminho/para/seu/projeto_pico
 curl -O https://raw.githubusercontent.com/georgines/instalador_u8g2pico/main/instalar_u8g2pico.sh
 ```
 
-### 4. Executar o script
+### 4. Dar permissão de execução ao script (se necessário)
 ```bash
-bash ./instalar_u8g2pico.sh
+chmod +x instalar_u8g2pico.sh
 ```
 
+### 5. Executar o script no terminal bash
+```bash
+./instalar_u8g2pico.sh
+```
+
+## Configuração automática do CMakeLists.txt
+
+O script adiciona automaticamente as seguintes linhas ao seu arquivo `CMakeLists.txt`:
+
+```cmake
+add_subdirectory(lib/u8g2pico)
+target_link_libraries(seu_projeto u8g2pico)
+```
+
+### Configuração manual
+
+Caso o script não consiga modificar automaticamente o CMakeLists.txt ou você prefira fazer manualmente, adicione estas linhas:
+
+1. **Após a linha `project()`**, adicione:
+```cmake
+add_subdirectory(lib/u8g2pico)
+```
+
+2. **Na seção `target_link_libraries()`**, adicione `u8g2pico`:
+```cmake
+target_link_libraries(seu_projeto 
+    pico_stdlib
+    u8g2pico <--
+)
+```
 ## Exemplo de uso
 
 Após a instalação bem-sucedida das bibliotecas, você pode usar o código abaixo como exemplo em seu projeto:
