@@ -13,7 +13,8 @@ detect_project_name() {
     if [ -f "$cmake_file" ]; then
         local project_line=$(grep -i "^[[:space:]]*project(" "$cmake_file" | head -1)
         if [ -n "$project_line" ]; then
-            local project_name=$(echo "$project_line" | sed 's/.*project(\s*\([^[:space:]]*\).*/\1/i' | tr -d ')')
+            # Captura nomes de projeto que podem conter letras, números, underscores e hífens
+            local project_name=$(echo "$project_line" | sed 's/.*project([[:space:]]*\([a-zA-Z0-9_-][a-zA-Z0-9_-]*\).*/\1/i')
             echo "$project_name"
         fi
     fi
