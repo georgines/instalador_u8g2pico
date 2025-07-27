@@ -2,34 +2,53 @@
 
 Script para instalar automaticamente a biblioteca **u8g2pico** e **u8g2lib** em projetos Raspberry Pi Pico.
 
-## 📋 O que você precisa
+## Sobre as bibliotecas
 
-- Git instalado (teste com `git --version`)
+### u8g2lib
+A **u8g2lib** é uma biblioteca monochrome graphics library desenvolvida por **Oliver Kraus (@olikraus)** para displays embarcados. É uma biblioteca amplamente utilizada e reconhecida na comunidade maker, suportando uma grande variedade de displays OLED e LCD.
+
+### u8g2pico
+A **u8g2pico** é um port/adaptação da u8g2lib especificamente desenvolvida para o **Raspberry Pi Pico**. Esta biblioteca facilita o uso de displays gráficos monocromáticos no Pico, aproveitando as funcionalidades específicas do RP2040 e do SDK do Pico. Ela ainda está em desenvolvimento.
+
+## Requisitos
+
+- Git instalado
 - Projeto Raspberry Pi Pico com arquivo `CMakeLists.txt`
 
-## 🚀 Como instalar
+**Para verificar se o Git está instalado:**
+```bash
+git --version
+```
 
-### 1. Abra o terminal no VS Code
-- Pressione `Ctrl + Shift + ` ` (crase)
-- Se não for Bash, clique na seta ao lado do nome do terminal e escolha "Git Bash"
+## Instalação
 
-### 2. Vá para a pasta do seu projeto
+### 1. Abrir o terminal no VS Code
+Pressione a combinação de teclas para abrir o terminal integrado:
+```
+Ctrl + Shift + `
+```
+
+Se o terminal não estiver configurado para Bash, clique na seta ao lado do nome do terminal e selecione "Git Bash".
+
+### 2. Navegar para a pasta do projeto
+Substitua o caminho abaixo pelo caminho real do seu projeto:
 ```bash
 cd /c/caminho/para/seu/projeto_pico
 ```
 
-### 3. Baixe e execute o script
+### 3. Baixar o script de instalação
 ```bash
-# Baixe o script
 curl -O https://raw.githubusercontent.com/georgines/instalador_u8g2pico/main/instalar_u8g2pico.sh
+```
 
-# Execute o script
+### 4. Executar o script
+```bash
 bash ./instalar_u8g2pico.sh
 ```
 
-## � Exemplo de uso
+## Exemplo de uso
 
-Depois da instalação, use assim no seu código:
+Após a instalação bem-sucedida das bibliotecas, você pode usar o código abaixo como exemplo em seu projeto:
 
 ```c
 #include "pico/stdlib.h"
@@ -55,23 +74,35 @@ int main() {
     // Escrever texto
     u8g2_ClearBuffer(&u8g2pico);
     u8g2_SetFont(&u8g2pico, u8g2_font_8bitclassic_tf);
-    u8g2_DrawStr(&u8g2pico, 0, 25, "Hello World!");
+    u8g2_DrawStr(&u8g2pico, 0, 25, "U8G2Pico");
     u8g2_SendBuffer(&u8g2pico);
+    
+    return 0;
 }
 ```
 
-## 🛠️ Problemas comuns
+## Solução de problemas
 
-**Git não encontrado?**
-- Instale o Git: https://git-scm.com/downloads
+### Git não encontrado
+Se você receber um erro de que o Git não foi encontrado, instale-o através do link oficial:
+```
+https://git-scm.com/downloads
+```
 
-**Não tem o arquivo CMakeLists.txt?**
-- Execute o script na pasta raiz do seu projeto Pico
+### Arquivo CMakeLists.txt não encontrado
+Certifique-se de que você está executando o script na pasta raiz do seu projeto Pico onde está localizado o arquivo `CMakeLists.txt`.
 
-**Para reinstalar:**
-- Execute o script novamente
+### Para reinstalar as bibliotecas
+Se for necessário reinstalar, execute o script novamente:
+```bash
+bash ./instalar_u8g2pico.sh
+```
 
-## 📚 Links úteis
+## Links úteis
 
-- [Documentação u8g2](https://github.com/olikraus/u8g2)
-- [u8g2pico no GitHub](https://github.com/georgines/u8g2pico)
+- [Documentação u8g2](https://github.com/olikraus/u8g2) - Biblioteca original por Oliver Kraus
+- [u8g2pico no GitHub](https://github.com/georgines/u8g2pico) - Port para Raspberry Pi Pico
+
+## Créditos
+
+- **Oliver Kraus (@olikraus)** - Criador da biblioteca u8g2lib original
